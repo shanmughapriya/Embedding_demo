@@ -38,7 +38,7 @@ if st.button("Generate Visualization") and input_text:
         
 
     pca = PCA(n_components=2)
-    reduced = pca.fit_transform(embeddings[0].cpu().numpy())
+    reduced = pca.fit_transform(embeddings[0].cpu().clone().numpy())
 
 
     # Matplotlib figure
