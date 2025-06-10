@@ -34,7 +34,7 @@ if st.button("Generate Visualization") and input_text:
 
     with torch.no_grad():
         outputs = model(token_ids, output_hidden_states=True)
-        embeddings = outputs.hidden_state[-1]
+        embeddings = outputs.hidden_states[-1]
         
 
     pca = PCA(n_components=2)
