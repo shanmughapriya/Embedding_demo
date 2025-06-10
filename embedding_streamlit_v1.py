@@ -3,14 +3,16 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-import nltk
-from nltk.corpus import stopwords
+#import nltk
+#from nltk.corpus import stopwords
 
 from adjustText import adjust_text
 
 # Initial setup
-nltk.download('stopwords')
-stop_words = set(stopwords.words('english'))
+#nltk.download('stopwords')
+#stop_words = set(stopwords.words('english'))
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+stop_words = ENGLISH_STOP_WORDS
 
 # Load model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
