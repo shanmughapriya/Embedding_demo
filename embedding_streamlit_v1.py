@@ -1,5 +1,6 @@
 import streamlit as st
-from transformers import AutoTokenizer, AutoModel
+#from transformers import AutoTokenizer, AutoModel
+from transformers import AutoTokenizer,AutoModelForMaskedLM
 import torch
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
@@ -16,7 +17,7 @@ stop_words = ENGLISH_STOP_WORDS
 
 # Load model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
-model = AutoModel.from_pretrained("distilbert-base-uncased")
+model = AutoModelForMaskedLM.from_pretrained("distilbert-base-uncased")
 
 #tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 #model = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -32,8 +33,8 @@ if st.button("Generate Visualization") and input_text:
     token_ids = tokenizer.encode(input_text, return_tensors="pt")
 
     with torch.no_grad():
-        outputs = model(token_ids)
-        embeddings = outputs.last_hidden_state
+        outputs = model(token_ids, output_hidden_states=True)
+        embeddings = outputs.last_hidden_state[-1]
         
 
     pca = PCA(n_components=2)
