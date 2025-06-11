@@ -35,7 +35,10 @@ if st.button("Generate Visualization") and input_text:
     with torch.no_grad():
         outputs = model(token_ids, output_hidden_states=True)
         embeddings = outputs.hidden_states[-1]
-        
+    st.write("Debug info")
+    st.write("Embedding device",embeddings.device)
+    st.write("Embedding device",embeddings.dtype)
+    st.write("Embedding device",embeddings.shape)
 
     pca = PCA(n_components=2)
     reduced = pca.fit_transform(embeddings[0].cpu().clone().numpy())
