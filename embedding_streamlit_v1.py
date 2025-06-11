@@ -41,7 +41,7 @@ if st.button("Generate Visualization") and input_text:
     st.write("Embedding device",embeddings.shape)
 
     pca = PCA(n_components=2)
-    reduced = pca.fit_transform(embeddings[0].cpu().clone().numpy())
+    reduced = pca.fit_transform(embeddings[0].cpu().clone().tolist())
 
 
     # Matplotlib figure
